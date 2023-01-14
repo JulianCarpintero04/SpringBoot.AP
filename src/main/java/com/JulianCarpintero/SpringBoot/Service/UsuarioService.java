@@ -1,36 +1,42 @@
 
 package com.JulianCarpintero.SpringBoot.Service;
 
+import Exception.UserNotFoundException;
 import com.JulianCarpintero.SpringBoot.Model.Usuario;
 import com.JulianCarpintero.SpringBoot.Repository.UsuarioRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UsuarioService implements IUsuarioService {
-
-    @Autowired
-    public UsuarioRepository usuRepo;
+@Transactional
+public class UsuarioService{
+    private final UsuarioRepository usuarioRepository;
     
-    @Override
-    public List<Usuario> verUsuarios() {
-        return usuRepo.findAll();
+    @Autowired
+    public UsuarioService(UsuarioRepository usuarioRepository){
+        this.usuarioRepository = usuarioRepository;
     }
-
-    @Override
-    public void crearUsuario(Usuario us) {
-        usuRepo.save(us);
+    
+   public Usuario addUsuario(Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
-
-    @Override
-    public void borrarUsuario(Long id) {
-        usuRepo.deleteById(id);
+    
+    public List<Usuario> buscarUsuarios(){
+        return usuarioRepository.findAll();
     }
-
-    @Override
-    public Usuario buscarUsuario(Long id) {
-        return usuRepo.findById(id).orElse(null);
+    
+    public Usuario editarUsuario(Usuario usuario){
+        return usuarioRepository.save(usuario);
+    }
+    
+    public void borrarUsuario(Long id){
+        usuarioRepository.deleteById(id);
+    }
+    
+    public Usuario buscarUsuarioPorId(Long id){
+        return usuarioRepository.findById(id).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
     }
     
 }

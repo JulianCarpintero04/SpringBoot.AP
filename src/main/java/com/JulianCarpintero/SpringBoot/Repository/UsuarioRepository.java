@@ -1,4 +1,3 @@
-
 package com.JulianCarpintero.SpringBoot.Repository;
 
 import com.JulianCarpintero.SpringBoot.Model.Usuario;
