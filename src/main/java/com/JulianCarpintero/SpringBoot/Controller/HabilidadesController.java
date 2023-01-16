@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/habilidades")
+@RequestMapping("/habilidades")
 public class HabilidadesController {
     private final HabilidadesService habilidadesService;
     
@@ -24,25 +24,25 @@ public class HabilidadesController {
         this.habilidadesService = habilidadesService;
     }
     
-    @GetMapping
+    @GetMapping("/todas")
     public ResponseEntity<List<Habilidades>> obtenerHabilidades(){
         List<Habilidades> habilidades=habilidadesService.buscarHabilidades();
         return new ResponseEntity<>(habilidades,HttpStatus.OK);
     }
     
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<Habilidades> editarHabilidades(@RequestBody Habilidades habilidades){
         Habilidades updateHabilidades=habilidadesService.editarHabilidades(habilidades);
         return new ResponseEntity<>(updateHabilidades,HttpStatus.OK);
     }
     
-    @PostMapping
+    @PostMapping("/agregar")
     public ResponseEntity<Habilidades> agregarHabilidad(@RequestBody Habilidades habilidades){
         Habilidades nuevaHabilidad = habilidadesService.addHabilidades(habilidades);
         return new ResponseEntity<>(nuevaHabilidad,HttpStatus.CREATED);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> borrarHabilidad(@PathVariable("id")Long id){
         habilidadesService.borrarHabilidades(id);
         return new ResponseEntity<>(HttpStatus.OK);

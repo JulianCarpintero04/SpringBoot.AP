@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/proyectos")
+@RequestMapping("/proyectos")
 public class ProyectosController {
     private final ProyectosService proyectosService;
     
@@ -24,25 +24,25 @@ public class ProyectosController {
         this.proyectosService = proyectosService;
     }
     
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Proyectos>> obtenerProyectos(){
         List<Proyectos> proyectos=proyectosService.buscarProyectos();
         return new ResponseEntity<>(proyectos,HttpStatus.OK);
     }
     
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<Proyectos> editarProyectos(@RequestBody Proyectos proyectos){
         Proyectos updateProyectos=proyectosService.editarProyectos(proyectos);
         return new ResponseEntity<>(updateProyectos,HttpStatus.OK);
     }
     
-    @PostMapping
+    @PostMapping("/agregar")
     public ResponseEntity<Proyectos> agregarProyecto(@RequestBody Proyectos proyectos){
         Proyectos nuevoProyecto = proyectosService.addProyectos(proyectos);
         return new ResponseEntity<>(nuevoProyecto,HttpStatus.CREATED);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> borrarProyecto(@PathVariable("id")Long id){
         proyectosService.borrarProyectos(id);
         return new ResponseEntity<>(HttpStatus.OK);

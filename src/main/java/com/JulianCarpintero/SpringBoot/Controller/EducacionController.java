@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/educacion")
+@RequestMapping("/educacion")
 public class EducacionController {
     private final EducacionService educacionService;
     
@@ -24,25 +24,25 @@ public class EducacionController {
         this.educacionService = educacionService;
     }
     
-    @GetMapping
+    @GetMapping("/todas")
     public ResponseEntity<List<Educacion>> obtenerEducaciones(){
         List<Educacion> educaciones=educacionService.buscarEducaciones();
         return new ResponseEntity<>(educaciones,HttpStatus.OK);
     }
     
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<Educacion> editarEducacion(@RequestBody Educacion educacion){
         Educacion updateEducacion=educacionService.editarEducacion(educacion);
         return new ResponseEntity<>(updateEducacion,HttpStatus.OK);
     }
     
-    @PostMapping
+    @PostMapping("/agregar")
     public ResponseEntity<Educacion> agregarEducacion(@RequestBody Educacion educacion){
         Educacion nuevaEducacion = educacionService.addEducacion(educacion);
         return new ResponseEntity<>(nuevaEducacion,HttpStatus.CREATED);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> borrarEducacion(@PathVariable("id")Long id){
         educacionService.borrarEducacion(id);
         return new ResponseEntity<>(HttpStatus.OK);

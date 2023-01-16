@@ -24,7 +24,7 @@ public class PersonaRepositoryTests {
         String rawPassword = "jic050704";
         String encodePassword=passwordEncoder.encode(rawPassword);
         Persona newPersona= new Persona("juliancarpintero04@gmail.com", encodePassword);
-        Persona savedPersona=repo.save(newPersona);
+        Persona savedPersona = repo.save(newPersona);
         assertThat(savedPersona).isNotNull();
         assertThat(savedPersona.getId()).isGreaterThan(0);
     }

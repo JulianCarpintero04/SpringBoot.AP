@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/usuario")
 public class UsuarioController {
     private final UsuarioService usuarioService;
     
@@ -21,13 +21,13 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
     
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Usuario> obtenerUsuario(@PathVariable("id")Long id){
         Usuario usuario=usuarioService.buscarUsuarioPorId(id);
         return new ResponseEntity<>(usuario,HttpStatus.OK);
     }
     
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<Usuario> editarUsuario(@RequestBody Usuario usuario){
         Usuario updateUsuario=usuarioService.editarUsuario(usuario);
         return new ResponseEntity<>(updateUsuario,HttpStatus.OK);

@@ -1,4 +1,6 @@
-package Security.jwt;
+package com.JulianCarpintero.SpringBoot;
+
+
 
 import com.JulianCarpintero.SpringBoot.Model.Persona;
 import java.io.IOException;
@@ -17,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter{
-    @Autowired
+    @Autowired(required = true)
     private JwtTokenUtil jwtUtil;
     
     @Override
@@ -77,3 +79,4 @@ public class JwtTokenFilter extends OncePerRequestFilter{
         return userDetails;
     }
 }
+
